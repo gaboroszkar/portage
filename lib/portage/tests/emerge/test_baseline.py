@@ -38,6 +38,8 @@ from portage.process import find_binary
 from portage.tests import cnf_etc_path
 from portage.util import ensure_dirs
 from portage.util.futures import asyncio
+import portage.util._xattr
+import portage.util.movefile
 
 
 _METADATA_XML_FILES = (
@@ -63,6 +65,7 @@ move dev-util/git dev-vcs/git
 
 @pytest.mark.ft
 def test_portage_baseline(async_loop, playground, binhost, baseline_command):
+
     async_loop.run_until_complete(
         asyncio.ensure_future(
             _async_test_baseline(
